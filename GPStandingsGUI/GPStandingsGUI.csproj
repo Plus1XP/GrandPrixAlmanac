@@ -62,19 +62,21 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="MainWindow.xaml">
+    <Page Include="Views\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Compile Include="Controllers\AsyncRelayCommand.cs" />
-    <Compile Include="Controllers\RelayCommand.cs" />
+    <Compile Include="Controllers\APIController.cs" />
+    <Compile Include="Models\AsyncRelayCommand.cs" />
+    <Compile Include="Models\RelayCommand.cs" />
     <Compile Include="Models\APIHelper.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Controllers\GPStandings.cs" />
-    <Compile Include="MainWindow.xaml.cs">
+    <Compile Include="Controllers\GPLogicController.cs" />
+    <Compile Include="ViewModels\GPStandingsViewModel.cs" />
+    <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
@@ -111,8 +113,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Views\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

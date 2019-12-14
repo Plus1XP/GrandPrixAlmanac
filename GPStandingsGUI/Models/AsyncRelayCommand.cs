@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace GPStandingsGUI.Controllers
+namespace GPStandingsGUI.Models
 {
     public class AsyncRelayCommand : ICommand
     {
@@ -49,7 +49,10 @@ namespace GPStandingsGUI.Controllers
 
         protected virtual void OnCanExecuteChanged()
         {
-            if (CanExecuteChanged != null) CanExecuteChanged(this, new EventArgs());
+            if (CanExecuteChanged != null)
+            {
+                CanExecuteChanged(this, new EventArgs());
+            }
         }
     }
 }

@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace GPStandingsGUI.Controllers
+namespace GPStandingsGUI.Models
 {
     public class RelayCommand : ICommand
     {
