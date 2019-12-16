@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:GPStandingsGUI"
         xmlns:ViewModels="clr-namespace:GPStandingsGUI.ViewModels"
         mc:Ignorable="d" FontSize="18"
-        Title="GP Standings v2.1.0" WindowStartupLocation="Manual" Left="30" Top="30" 
+        Title="{Binding WindowTitle}" WindowStartupLocation="Manual" Left="30" Top="30" 
         SizeToContent="WidthAndHeight" MinWidth="600" MinHeight="900" MaxHeight="950">
         <!--MinWidth="1225"-->
     
@@ -71,12 +71,7 @@
                       AlternatingRowBackground="GhostWhite"
                 ItemsSource = "{Binding StandingsTable1}" AutoGenerateColumns="True">
                 <DataGrid.Columns>
-                    <!--<DataGridTextColumn Header="Position" Binding="{Binding Position}"/>
-                    <DataGridTextColumn Header="Driver" Binding="{Binding Driver}"/>
-                    <DataGridTextColumn Header="Constructor" Binding="{Binding Constructor}"/>
-                    <DataGridTextColumn Header="Points" Binding="{Binding Points}"/>
-                    <DataGridTextColumn Header="Wins" Binding="{Binding Wins}"/>
-                    <DataGridTextColumn Header="Nationality" Binding="{Binding Nationality}"/>-->
+                    
                 </DataGrid.Columns>
             </DataGrid>
         </ScrollViewer>
@@ -92,7 +87,7 @@
         <StackPanel Grid.Column="5" Grid.Row="4" Grid.ColumnSpan="3" 
                     Orientation="Horizontal">
             <RadioButton x:Name="constructorRadioButton2" 
-                         Margin="5" IsChecked="{Binding CanSearchConstructors2}"/>
+                         Margin="5" IsChecked="{Binding CanSearchConstructors}"/>
             <TextBlock Text="{Binding ConstructorsContent}"/>
             <RadioButton x:Name="driverRadioButton2" IsChecked="True" 
                          Margin="15,5,5,5" Checked="DriverRadioButton2_Checked"/>
@@ -109,11 +104,7 @@
                       AlternatingRowBackground="GhostWhite"
                 ItemsSource = "{Binding StandingsTable2}" AutoGenerateColumns="True">
                 <DataGrid.Columns>
-                    <!--<DataGridTextColumn Header="POS" Binding="{Binding Path=POS}"/>
-                    <DataGridTextColumn Header="Driver" Binding="{Binding Driver}"/>
-                    <DataGridTextColumn Header="Points" Binding="{Binding Points}"/>
-                    <DataGridTextColumn Header="Wins" Binding="{Binding wins}"/>
-                    <DataGridTextColumn Header="Team" Binding="{Binding Team}"/>-->
+                    
                 </DataGrid.Columns>
             </DataGrid>
         </ScrollViewer>        

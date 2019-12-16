@@ -17,7 +17,7 @@ namespace GPStandingsGUI.Controllers
 
         public GPLogicController()
         {
-            //apiController = new APIController();
+
         }
 
         public Tuple<string, int> CheckDateEntryIsValid(string SelectedYear, bool CanSearchConstructors)

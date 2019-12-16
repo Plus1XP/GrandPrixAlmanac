@@ -24,11 +24,11 @@ namespace GPStandingsGUI.ViewModels
 
         private ObservableCollection<Models.GPStandingsCollection> standingsTable2;
 
-        public string UserSelectedYear { get; set; }
+        public bool CanPopulateResultsTable1 { get; set; }
 
         public bool CanSearchConstructors { get; set; }
 
-        public bool CanPopulateResultsTable1 { get; set; }
+        public string UserSelectedYear { get; set; }
 
         public string Heading1 { get { return this.heading1; } set { this.heading1 = value; this.OnPropertyChanged("Heading1"); } }
 
@@ -49,6 +49,8 @@ namespace GPStandingsGUI.ViewModels
         public Models.AsyncRelayCommand Cmd1 { get; private set; }
 
         public Models.AsyncRelayCommand Cmd2 { get; private set; }
+
+        public string WindowTitle { get { return "GP Standings v2.1.1"; } }
 
         public string SubmitButtonContent { get { return "Go!"; } }
 
