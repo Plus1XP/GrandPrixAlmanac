@@ -10,8 +10,8 @@ namespace GPStandingsGUI.Controllers
 {
     class APIController
     {
-        private Models.ConstructorModel constructor;
-        private Models.DriverModel driver;
+        private Models.ConstructorModel constructorModel;
+        private Models.DriverModel driverModel;
 
         private readonly Models.APIHelper apiHelper;
         
@@ -19,8 +19,8 @@ namespace GPStandingsGUI.Controllers
 
         public APIController(int year, string table)
         {
-            this.constructor = new Models.ConstructorModel();
-            this.driver = new Models.DriverModel();
+            this.constructorModel = new Models.ConstructorModel();
+            this.driverModel = new Models.DriverModel();
 
             this.apiHelper = new Models.APIHelper();
             this.apiHelper.InitializeClient();
@@ -28,18 +28,18 @@ namespace GPStandingsGUI.Controllers
             this.apiURL = $"https://ergast.com/api/f1/{year}/{table}.json";
         }
 
-        public async Task<Tuple<string, ObservableCollection<Models.GPStandingsCollection>>> ConstructorsStandings()
+        public async Task<Tuple<string, ObservableCollection<Models.IStandingsCollection>>> ConstructorsStandings()
         {
-            ObservableCollection<Models.GPStandingsCollection> standingsTable = new ObservableCollection<Models.GPStandingsCollection>();
+            ObservableCollection<Models.IStandingsCollection> standingsCollection = new ObservableCollection<Models.IStandingsCollection>();
             
-            this.constructor = await this.GetModelData(this.constructor, this.apiURL);
+            this.constructorModel = await this.GetModelData(this.constructorModel, this.apiURL);
 
             string heading =
-                $"{this.constructor.MRData.StandingsTable.StandingsLists[0].season} Formula 1 Season - {this.constructor.MRData.StandingsTable.StandingsLists[0].round} Rounds";
+                $"{this.constructorModel.MRData.StandingsTable.StandingsLists[0].season} Formula 1 Season - {this.constructorModel.MRData.StandingsTable.StandingsLists[0].round} Rounds";
 
-            foreach (Models.ConstructorModel.Constructorstanding constructor in this.constructor.MRData.StandingsTable.StandingsLists[0].ConstructorStandings)
+            foreach (Models.ConstructorModel.Constructorstanding constructor in this.constructorModel.MRData.StandingsTable.StandingsLists[0].ConstructorStandings)
             {
-                standingsTable.Add(new Models.GPStandingsCollection()
+                standingsCollection.Add(new Models.ConstructorsStandingsCollection()
                 {
                     Position = int.Parse(constructor.position),
                     Constructor = constructor.Constructor.name,
@@ -49,22 +49,22 @@ namespace GPStandingsGUI.Controllers
                 });
             }
 
-            return new Tuple<string, ObservableCollection<Models.GPStandingsCollection>>(heading, standingsTable);
+            return new Tuple<string, ObservableCollection<Models.IStandingsCollection>>(heading, standingsCollection);
 
         }
 
-        public async Task<Tuple<string, ObservableCollection<Models.GPStandingsCollection>>> DriversStandings()
+        public async Task<Tuple<string, ObservableCollection<Models.IStandingsCollection>>> DriversStandings()
         {
-            ObservableCollection<Models.GPStandingsCollection> standingsTable = new ObservableCollection<Models.GPStandingsCollection>();
+            ObservableCollection<Models.IStandingsCollection> standingsCollection = new ObservableCollection<Models.IStandingsCollection>();
             
-            this.driver = await this.GetModelData(this.driver, this.apiURL);
+            this.driverModel = await this.GetModelData(this.driverModel, this.apiURL);
 
             string heading =
-                $"{this.driver.MRData.StandingsTable.StandingsLists[0].season} Formula 1 Season - {driver.MRData.StandingsTable.StandingsLists[0].round} Rounds";
+                $"{this.driverModel.MRData.StandingsTable.StandingsLists[0].season} Formula 1 Season - {driverModel.MRData.StandingsTable.StandingsLists[0].round} Rounds";
 
-            foreach (Models.DriverModel.Driverstanding driver in this.driver.MRData.StandingsTable.StandingsLists[0].DriverStandings)
+            foreach (Models.DriverModel.Driverstanding driver in this.driverModel.MRData.StandingsTable.StandingsLists[0].DriverStandings)
             {
-                standingsTable.Add(new Models.GPStandingsCollection()
+                standingsCollection.Add(new Models.DriversStandingsCollection()
                 {
                     Position = int.Parse(driver.position),
                     Driver =
@@ -76,7 +76,7 @@ namespace GPStandingsGUI.Controllers
                 });
             }
 
-            return new Tuple<string, ObservableCollection<Models.GPStandingsCollection>>(heading, standingsTable);
+            return new Tuple<string, ObservableCollection<Models.IStandingsCollection>>(heading, standingsCollection);
 
         }
 

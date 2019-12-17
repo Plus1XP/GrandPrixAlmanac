@@ -75,13 +75,14 @@ namespace GPStandingsGUI.Controllers
             return warning;
         }
 
-        public async Task<Tuple<string, ObservableCollection<Models.GPStandingsCollection>>> GetResults(int year, bool canSearchConstructors)
+        public async Task<Tuple<string, ObservableCollection<Models.IStandingsCollection>>> GetResults(int year, bool canSearchConstructors)
         {
             if (canSearchConstructors)
             {
                 string table = "constructorStandings";
                 this.apiController = new APIController(year, table);
                 return await this.apiController.ConstructorsStandings();
+
             }
             else
             {

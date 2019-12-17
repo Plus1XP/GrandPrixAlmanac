@@ -20,9 +20,9 @@ namespace GPStandingsGUI.ViewModels
 
         private string heading2;
 
-        private ObservableCollection<Models.GPStandingsCollection> standingsTable1;
+        private ObservableCollection<Models.IStandingsCollection> standingsTable1;
 
-        private ObservableCollection<Models.GPStandingsCollection> standingsTable2;
+        private ObservableCollection<Models.IStandingsCollection> standingsTable2;
 
         public bool CanPopulateResultsTable1 { get; set; }
 
@@ -34,13 +34,13 @@ namespace GPStandingsGUI.ViewModels
 
         public string Heading2 { get { return this.heading2; } set { this.heading2 = value; this.OnPropertyChanged("Heading2"); } }
 
-        public ObservableCollection<Models.GPStandingsCollection> StandingsTable1
+        public ObservableCollection<Models.IStandingsCollection> StandingsTable1
         {
             get { return this.standingsTable1; }
             set { this.standingsTable1 = value; this.OnPropertyChanged("StandingsTable1"); }
         }
 
-        public ObservableCollection<Models.GPStandingsCollection> StandingsTable2
+        public ObservableCollection<Models.IStandingsCollection> StandingsTable2
         {
             get { return this.standingsTable2; }
             set { this.standingsTable2 = value; this.OnPropertyChanged("StandingsTable2"); }
@@ -50,7 +50,7 @@ namespace GPStandingsGUI.ViewModels
 
         public Models.AsyncRelayCommand Cmd2 { get; private set; }
 
-        public string WindowTitle { get { return "GP Standings v2.1.1"; } }
+        public string WindowTitle { get { return "GP Standings v2.2.0"; } }
 
         public string SubmitButtonContent { get { return "Go!"; } }
 
@@ -90,24 +90,24 @@ namespace GPStandingsGUI.ViewModels
             }
             else
             {
-                Tuple<string, ObservableCollection<Models.GPStandingsCollection>> tableResults = await gpLogicController.GetResults(year, this.CanSearchConstructors);
-                string header = tableResults.Item1;
-                ObservableCollection<Models.GPStandingsCollection> table = tableResults.Item2;
-                this.UpdateCollection(canPopulateResultsTable1, header, table);
+                Tuple<string, ObservableCollection<Models.IStandingsCollection>> standingsCollection = await gpLogicController.GetResults(year, this.CanSearchConstructors);
+                string header = standingsCollection.Item1;
+                ObservableCollection<Models.IStandingsCollection> standingsTable = standingsCollection.Item2;
+                this.UpdateCollection(canPopulateResultsTable1, header, standingsTable);
             }
         }
 
-        private void UpdateCollection(bool canPopulateResultsTable1, string header, ObservableCollection<Models.GPStandingsCollection> table)
+        private void UpdateCollection(bool canPopulateResultsTable1, string header, ObservableCollection<Models.IStandingsCollection> standingsTable)
         {
             if (canPopulateResultsTable1)
             {
                 this.Heading1 = header;
-                this.StandingsTable1 = table;
+                this.StandingsTable1 = standingsTable;
             }
             else
             {
                 this.Heading2 = header;
-                this.StandingsTable2 = table;
+                this.StandingsTable2 = standingsTable;
             }
         }
 

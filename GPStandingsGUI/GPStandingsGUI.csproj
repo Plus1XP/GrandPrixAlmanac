@@ -68,6 +68,9 @@
     </Page>
     <Compile Include="Controllers\APIController.cs" />
     <Compile Include="Models\AsyncRelayCommand.cs" />
+    <Compile Include="Models\ConstructorsStandingsCollection.cs" />
+    <Compile Include="Models\DriversStandingsCollection.cs" />
+    <Compile Include="Models\IStandingsCollection.cs" />
     <Compile Include="Models\RelayCommand.cs" />
     <Compile Include="Models\APIHelper.cs" />
     <Compile Include="App.xaml.cs">
@@ -83,10 +86,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\ConstructorModel.cs" />
-    <Compile Include="Models\ConstructorsCollection.cs" />
     <Compile Include="Models\DriverModel.cs" />
-    <Compile Include="Models\DriversCollection.cs" />
-    <Compile Include="Models\GPStandingsCollection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
