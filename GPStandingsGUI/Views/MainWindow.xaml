@@ -45,7 +45,7 @@
         <StackPanel Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="3"
                     Orientation="Horizontal">
             <TextBlock Text="Search Year" FontWeight="Bold" Margin="0,0,5,0"/>
-            <TextBox x:Name="searchTextBox1" Width="150" Text="{Binding UserSelectedYear}"/>
+            <TextBox x:Name="searchTextBox1" Width="150" Text="{Binding UserSelectedYear1}"/>
             <Button x:Name="submitButton1" Width="35" Content="{Binding SubmitButtonContent}"
                     Command="{Binding Cmd1}" 
                     CommandParameter="Results1"/>
@@ -54,7 +54,7 @@
         <StackPanel Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="3"
                     Orientation="Horizontal" >
             <RadioButton x:Name="constructorRadioButton1"
-                         Margin="5" IsChecked="{Binding CanSearchConstructors}"/>
+                         Margin="5" IsChecked="{Binding CanSearchConstructors1}"/>
             <TextBlock Text="{Binding ConstructorsContent}"/>
             <RadioButton x:Name="driverRadioButton1" IsChecked="true"
                          Margin="15,5,5,5" Checked="DriverRadioButton1_Checked"/>
@@ -79,7 +79,7 @@
         <StackPanel Grid.Column="5" Grid.Row="2" Grid.ColumnSpan="3"
                     Orientation="Horizontal">
             <TextBlock Text ="Search Year" FontWeight="Bold" Margin="0,0,5,0"/>
-            <TextBox x:Name="searchTextBox2" Width="150" Text="{Binding UserSelectedYear}"/>
+            <TextBox x:Name="searchTextBox2" Width="150" Text="{Binding UserSelectedYear2}"/>
             <Button x:Name="submitButton2" Width="35"  Content="{Binding SubmitButtonContent}" 
                     Command="{Binding Cmd2}" />
         </StackPanel>
@@ -87,7 +87,7 @@
         <StackPanel Grid.Column="5" Grid.Row="4" Grid.ColumnSpan="3" 
                     Orientation="Horizontal">
             <RadioButton x:Name="constructorRadioButton2" 
-                         Margin="5" IsChecked="{Binding CanSearchConstructors}"/>
+                         Margin="5" IsChecked="{Binding CanSearchConstructors2}"/>
             <TextBlock Text="{Binding ConstructorsContent}"/>
             <RadioButton x:Name="driverRadioButton2" IsChecked="True" 
                          Margin="15,5,5,5" Checked="DriverRadioButton2_Checked"/>

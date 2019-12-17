@@ -26,9 +26,13 @@ namespace GPStandingsGUI.ViewModels
 
         public bool CanPopulateResultsTable1 { get; set; }
 
-        public bool CanSearchConstructors { get; set; }
+        public bool CanSearchConstructors1 { get; set; }
 
-        public string UserSelectedYear { get; set; }
+        public bool CanSearchConstructors2 { get; set; }
+
+        public string UserSelectedYear1 { get; set; }
+
+        public string UserSelectedYear2 { get; set; }
 
         public string Heading1 { get { return this.heading1; } set { this.heading1 = value; this.OnPropertyChanged("Heading1"); } }
 
@@ -50,7 +54,7 @@ namespace GPStandingsGUI.ViewModels
 
         public Models.AsyncRelayCommand Cmd2 { get; private set; }
 
-        public string WindowTitle { get { return "GP Standings v2.2.0"; } }
+        public string WindowTitle { get { return "GP Standings v2.2.1"; } }
 
         public string SubmitButtonContent { get { return "Go!"; } }
 
@@ -62,10 +66,11 @@ namespace GPStandingsGUI.ViewModels
         {
             this.gpLogicController = new Controllers.GPLogicController();
 
-            this.CanSearchConstructors = false;
+            this.CanSearchConstructors1 = false;
+            this.CanSearchConstructors2 = false;
 
-            this.Cmd1 = new Models.AsyncRelayCommand(() => this.PopulateResults(this.CanPopulateResultsTable1 = true));
-            this.Cmd2 = new Models.AsyncRelayCommand(() => this.PopulateResults(this.CanPopulateResultsTable1 = false));
+            this.Cmd1 = new Models.AsyncRelayCommand(() => this.PopulateResults(this.UserSelectedYear1, this.CanSearchConstructors1, this.CanPopulateResultsTable1 = true));
+            this.Cmd2 = new Models.AsyncRelayCommand(() => this.PopulateResults(this.UserSelectedYear2, this.CanSearchConstructors2, this.CanPopulateResultsTable1 = false));
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -78,9 +83,9 @@ namespace GPStandingsGUI.ViewModels
             }
         }
 
-        private async Task PopulateResults(bool canPopulateResultsTable1)
+        private async Task PopulateResults(string userSelectedYear, bool canSearchConstructors, bool canPopulateResultsTable1)
         {
-            Tuple<string, int> validation = gpLogicController.CheckDateEntryIsValid(this.UserSelectedYear, this.CanSearchConstructors);
+            Tuple<string, int> validation = gpLogicController.CheckDateEntryIsValid(userSelectedYear, canSearchConstructors);
             string warning = validation.Item1;
             int year = validation.Item2;
 
@@ -90,7 +95,7 @@ namespace GPStandingsGUI.ViewModels
             }
             else
             {
-                Tuple<string, ObservableCollection<Models.IStandingsCollection>> standingsCollection = await gpLogicController.GetResults(year, this.CanSearchConstructors);
+                Tuple<string, ObservableCollection<Models.IStandingsCollection>> standingsCollection = await gpLogicController.GetResults(year, canSearchConstructors);
                 string header = standingsCollection.Item1;
                 ObservableCollection<Models.IStandingsCollection> standingsTable = standingsCollection.Item2;
                 this.UpdateCollection(canPopulateResultsTable1, header, standingsTable);
