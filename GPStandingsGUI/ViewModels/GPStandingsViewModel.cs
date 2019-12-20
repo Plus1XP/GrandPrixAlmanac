@@ -54,7 +54,16 @@ namespace GPStandingsGUI.ViewModels
 
         public Models.AsyncRelayCommand Cmd2 { get; private set; }
 
-        public string WindowTitle { get { return "GP Standings v2.2.1"; } }
+        public string WindowTitle
+        {
+            get { return $"GP Standings v{System.Diagnostics.FileVersionInfo.GetVersionInfo(System.Reflection.Assembly.GetExecutingAssembly().Location).FileVersion.ToString()}"; }
+        }
+
+        public string WindowColour { get { return "#011627"; } }
+
+        public string FontColour { get { return "#80a5ec"; } }
+
+        public string SearchTitle { get { return "Search Year"; } }
 
         public string SubmitButtonContent { get { return "Go!"; } }
 
