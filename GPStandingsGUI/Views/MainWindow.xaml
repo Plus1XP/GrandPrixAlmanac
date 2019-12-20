@@ -6,13 +6,58 @@
         xmlns:local="clr-namespace:GPStandingsGUI"
         xmlns:ViewModels="clr-namespace:GPStandingsGUI.ViewModels"
         mc:Ignorable="d" FontSize="18"
-        Title="{Binding WindowTitle}" WindowStartupLocation="Manual" Left="30" Top="30" 
+        Title="{Binding WindowTitle}" WindowStartupLocation="Manual" Left="30" Top="30"
         SizeToContent="WidthAndHeight" MinWidth="600" MinHeight="900" MaxHeight="950">
         <!--MinWidth="1225"-->
     
     <Window.DataContext>
         <ViewModels:GPStandingsViewModel/>
     </Window.DataContext>
+
+    <Window.Resources>
+        <Style TargetType="TextBlock" x:Key="SearchBoxTitle">
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Margin" Value="0,0,5,0"/>
+            <Setter Property="Text" Value="{Binding SearchTitle}"/>
+        </Style>
+        
+        <Style TargetType="TextBox" x:Key="SearchBox">
+            <Setter Property="Width" Value="150"/>
+        </Style>
+        
+        <Style TargetType="Button" x:Key="SubmitButton">
+            <Setter Property="Width" Value="35"/>
+            <Setter Property="Content" Value="{Binding SubmitButtonContent}"/>
+        </Style>
+
+        <Style TargetType="RadioButton" x:Key="ConstructorsStandingsbuttons">
+            <Setter Property="Margin" Value="5"/>
+        </Style>
+
+        <Style TargetType="TextBlock" x:Key="ConsructorsButtonContent">
+            <Setter Property="Text" Value="{Binding ConstructorsContent}"/>
+        </Style>
+
+        <Style TargetType="RadioButton" x:Key="DriversStandingsButtons">
+            <Setter Property="Margin" Value="15,5,5,5"/>
+            <Setter Property="IsChecked" Value="True"/>
+        </Style>
+
+        <Style TargetType="TextBlock" x:Key="DriverButtonContent">
+            <Setter Property="Text" Value="{Binding DriversContent}"/>
+        </Style>
+
+        <Style TargetType="TextBlock" x:Key="HeaderContent">
+            <Setter Property="Margin" Value="5,10,0,0"/>
+            <Setter Property="FontWeight" Value="DemiBold"/>
+        </Style>
+
+        <Style TargetType="DataGrid" x:Key="TableContent">
+            <Setter Property="GridLinesVisibility" Value="None"/>
+            <Setter Property="AutoGenerateColumns" Value="True"/>
+            <Setter Property="AlternatingRowBackground" Value="GhostWhite"/>
+        </Style>
+    </Window.Resources>
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -42,70 +87,53 @@
         
         <!--<Menu Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="7"/>-->
         
-        <StackPanel Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="3"
-                    Orientation="Horizontal">
-            <TextBlock Text="Search Year" FontWeight="Bold" Margin="0,0,5,0"/>
-            <TextBox x:Name="searchTextBox1" Width="150" Text="{Binding UserSelectedYear1}"/>
-            <Button x:Name="submitButton1" Width="35" Content="{Binding SubmitButtonContent}"
-                    Command="{Binding Cmd1}" 
+        <StackPanel Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="3" Orientation="Horizontal">
+            <TextBlock Style="{StaticResource SearchBoxTitle}"/>
+            <TextBox Style="{StaticResource SearchBox}" Text="{Binding UserSelectedYear1}"/>
+            <Button Style="{StaticResource SubmitButton}" Command="{Binding Cmd1}"
                     CommandParameter="Results1"/>
+            <!--why is this here ^-->
         </StackPanel>
         
-        <StackPanel Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="3"
-                    Orientation="Horizontal" >
-            <RadioButton x:Name="constructorRadioButton1"
-                         Margin="5" IsChecked="{Binding CanSearchConstructors1}"/>
-            <TextBlock Text="{Binding ConstructorsContent}"/>
-            <RadioButton x:Name="driverRadioButton1" IsChecked="true"
-                         Margin="15,5,5,5" Checked="DriverRadioButton1_Checked"/>
-            <TextBlock Text="{Binding DriversContent}"/>
+        <StackPanel Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="3" Orientation="Horizontal" >
+            <RadioButton Style="{StaticResource ConstructorsStandingsbuttons}" 
+                         IsChecked="{Binding CanSearchConstructors1}"/>
+            <TextBlock Style="{StaticResource ConsructorsButtonContent}"/>
+            <RadioButton Style="{StaticResource DriversStandingsButtons}"/>
+            <TextBlock Style="{StaticResource DriverButtonContent}"/>
         </StackPanel>
 
-        <TextBlock x:Name="titleTextBlock1" Grid.Column="1" Grid.Row="5" 
-                   Grid.ColumnSpan="3" FontWeight="DemiBold" Margin="5,10,0,0"
-                    Text="{Binding Heading1}"/>
+        <TextBlock Grid.Column="1" Grid.Row="5" Grid.ColumnSpan="3"
+                   Style="{StaticResource HeaderContent}" Text="{Binding Heading1}"/>
 
-        <ScrollViewer Grid.Column="1" Grid.Row="7" 
-                      Grid.ColumnSpan="3" Grid.RowSpan="2" >
-            <DataGrid x:Name="resultsDataGrid1" GridLinesVisibility="None" 
-                      AlternatingRowBackground="GhostWhite"
-                ItemsSource = "{Binding StandingsTable1}" AutoGenerateColumns="True">
-                <DataGrid.Columns>
-                    
-                </DataGrid.Columns>
+        <ScrollViewer Grid.Column="1" Grid.Row="7" Grid.ColumnSpan="3" Grid.RowSpan="2" >
+            <DataGrid Style="{StaticResource TableContent}"
+                ItemsSource = "{Binding StandingsTable1}">
+                <DataGrid.Columns></DataGrid.Columns>
             </DataGrid>
         </ScrollViewer>
 
-        <StackPanel Grid.Column="5" Grid.Row="2" Grid.ColumnSpan="3"
-                    Orientation="Horizontal">
-            <TextBlock Text ="Search Year" FontWeight="Bold" Margin="0,0,5,0"/>
-            <TextBox x:Name="searchTextBox2" Width="150" Text="{Binding UserSelectedYear2}"/>
-            <Button x:Name="submitButton2" Width="35"  Content="{Binding SubmitButtonContent}" 
-                    Command="{Binding Cmd2}" />
+        <StackPanel Grid.Column="5" Grid.Row="2" Grid.ColumnSpan="3" Orientation="Horizontal">
+            <TextBlock Style="{StaticResource SearchBoxTitle}"/>
+            <TextBox Style="{StaticResource SearchBox}" Text="{Binding UserSelectedYear2}"/>
+            <Button Style="{StaticResource SubmitButton}" Command="{Binding Cmd2}"/>
         </StackPanel>
         
-        <StackPanel Grid.Column="5" Grid.Row="4" Grid.ColumnSpan="3" 
-                    Orientation="Horizontal">
-            <RadioButton x:Name="constructorRadioButton2" 
-                         Margin="5" IsChecked="{Binding CanSearchConstructors2}"/>
-            <TextBlock Text="{Binding ConstructorsContent}"/>
-            <RadioButton x:Name="driverRadioButton2" IsChecked="True" 
-                         Margin="15,5,5,5" Checked="DriverRadioButton2_Checked"/>
-            <TextBlock Text="{Binding DriversContent}"/>
+        <StackPanel Grid.Column="5" Grid.Row="4" Grid.ColumnSpan="3" Orientation="Horizontal">
+            <RadioButton Style="{StaticResource ConstructorsStandingsbuttons}" 
+                         IsChecked="{Binding CanSearchConstructors2}"/>
+            <TextBlock Style="{StaticResource ConsructorsButtonContent}"/>
+            <RadioButton Style="{StaticResource DriversStandingsButtons}"/>
+            <TextBlock Style="{StaticResource DriverButtonContent}"/>
         </StackPanel>
 
-        <TextBlock x:Name="titleTextBlock2" Grid.Column="5" Grid.Row="5" 
-                   Grid.ColumnSpan="3" FontWeight="DemiBold" Margin="5,10,0,0"
-                   Text="{Binding Heading2}"/>
+        <TextBlock Grid.Column="5" Grid.Row="5" Grid.ColumnSpan="3"
+                   Style="{StaticResource HeaderContent}" Text="{Binding Heading2}"/>
 
-        <ScrollViewer Grid.Column="5" Grid.Row="7" 
-                      Grid.ColumnSpan="3" Grid.RowSpan="2">
-            <DataGrid x:Name="resultsDataGrid2" GridLinesVisibility="None"
-                      AlternatingRowBackground="GhostWhite"
-                ItemsSource = "{Binding StandingsTable2}" AutoGenerateColumns="True">
-                <DataGrid.Columns>
-                    
-                </DataGrid.Columns>
+        <ScrollViewer Grid.Column="5" Grid.Row="7" Grid.ColumnSpan="3" Grid.RowSpan="2">
+            <DataGrid Style="{StaticResource TableContent}"
+                      ItemsSource = "{Binding StandingsTable2}">
+                <DataGrid.Columns></DataGrid.Columns>
             </DataGrid>
         </ScrollViewer>        
     </Grid>
