@@ -17,6 +17,10 @@ namespace GPStandingsGUI.Controllers
         
         private readonly string apiURL;
 
+        //int year;
+        //string table;
+        //private readonly string apiURL2 = string.Format("https://ergast.com/api/f1/{0}/{1}.json", year, table);
+
         public APIController(int year, string table)
         {
             this.constructorModel = new Models.ConstructorModel();
