@@ -32,10 +32,10 @@ namespace GPStandingsGUI.Controllers
             this.apiURL = $"https://ergast.com/api/f1/{year}/{table}.json";
         }
 
-        public async Task<Tuple<string, ObservableCollection<Models.IStandingsCollection>>> ConstructorsStandings()
+        public async Task<Tuple<string, ObservableCollection<object>>> ConstructorsStandings()
         {
-            ObservableCollection<Models.IStandingsCollection> standingsCollection = new ObservableCollection<Models.IStandingsCollection>();
-            
+            ObservableCollection<object> standingsCollection = new ObservableCollection<object>();
+
             this.constructorModel = await this.GetModelData(this.constructorModel, this.apiURL);
 
             string heading =
@@ -53,14 +53,14 @@ namespace GPStandingsGUI.Controllers
                 });
             }
 
-            return new Tuple<string, ObservableCollection<Models.IStandingsCollection>>(heading, standingsCollection);
+            return new Tuple<string, ObservableCollection<object>>(heading, standingsCollection);
 
         }
 
-        public async Task<Tuple<string, ObservableCollection<Models.IStandingsCollection>>> DriversStandings()
+        public async Task<Tuple<string, ObservableCollection<object>>> DriversStandings()
         {
-            ObservableCollection<Models.IStandingsCollection> standingsCollection = new ObservableCollection<Models.IStandingsCollection>();
-            
+            ObservableCollection<object> standingsCollection = new ObservableCollection<object>();
+
             this.driverModel = await this.GetModelData(this.driverModel, this.apiURL);
 
             string heading =
@@ -80,7 +80,7 @@ namespace GPStandingsGUI.Controllers
                 });
             }
 
-            return new Tuple<string, ObservableCollection<Models.IStandingsCollection>>(heading, standingsCollection);
+            return new Tuple<string, ObservableCollection<object>>(heading, standingsCollection);
 
         }
 

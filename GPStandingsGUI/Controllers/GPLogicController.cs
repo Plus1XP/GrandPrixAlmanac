@@ -75,7 +75,7 @@ namespace GPStandingsGUI.Controllers
             return warning;
         }
 
-        public async Task<Tuple<string, ObservableCollection<Models.IStandingsCollection>>> GetResults(int year, bool canSearchConstructors)
+        public async Task<Tuple<string, ObservableCollection<object>>> GetResults(int year, bool canSearchConstructors)
         {
             if (canSearchConstructors)
             {

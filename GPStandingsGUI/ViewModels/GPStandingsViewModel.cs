@@ -20,9 +20,9 @@ namespace GPStandingsGUI.ViewModels
 
         private string heading2;
 
-        private ObservableCollection<Models.IStandingsCollection> standingsTable1;
+        private ObservableCollection<object> standingsTable1;
 
-        private ObservableCollection<Models.IStandingsCollection> standingsTable2;
+        private ObservableCollection<object> standingsTable2;
 
         public bool CanPopulateResultsTable1 { get; set; }
 
@@ -38,17 +38,17 @@ namespace GPStandingsGUI.ViewModels
 
         public string Heading2 { get { return this.heading2; } set { this.heading2 = value; this.OnPropertyChanged("Heading2"); } }
 
-        public ObservableCollection<Models.IStandingsCollection> StandingsTable1
+        public ObservableCollection<object> StandingsTable1
         {
             get { return this.standingsTable1; }
             set { this.standingsTable1 = value; this.OnPropertyChanged("StandingsTable1"); }
         }
 
-        public ObservableCollection<Models.IStandingsCollection> StandingsTable2
+        public ObservableCollection<object> StandingsTable2
         {
             get { return this.standingsTable2; }
             set { this.standingsTable2 = value; this.OnPropertyChanged("StandingsTable2"); }
-        }       
+        }
 
         public Models.AsyncRelayCommand Cmd1 { get; private set; }
 
@@ -104,14 +104,14 @@ namespace GPStandingsGUI.ViewModels
             }
             else
             {
-                Tuple<string, ObservableCollection<Models.IStandingsCollection>> standingsCollection = await gpLogicController.GetResults(year, canSearchConstructors);
+                Tuple<string, ObservableCollection<object>> standingsCollection = await gpLogicController.GetResults(year, canSearchConstructors);
                 string header = standingsCollection.Item1;
-                ObservableCollection<Models.IStandingsCollection> standingsTable = standingsCollection.Item2;
+                ObservableCollection<object> standingsTable = standingsCollection.Item2;
                 this.UpdateCollection(canPopulateResultsTable1, header, standingsTable);
             }
         }
 
-        private void UpdateCollection(bool canPopulateResultsTable1, string header, ObservableCollection<Models.IStandingsCollection> standingsTable)
+        private void UpdateCollection(bool canPopulateResultsTable1, string header, ObservableCollection<object> standingsTable)
         {
             if (canPopulateResultsTable1)
             {

@@ -9,6 +9,7 @@ namespace GPStandingsGUI.Models
     class DriversStandingsCollection : IStandingsCollection
     {
         public int Position { get; set; }
+        // Added only in Drivers Standings
         public string Driver { get; set; }
         public string Constructor { get; set; }
         public float Points { get; set; }
