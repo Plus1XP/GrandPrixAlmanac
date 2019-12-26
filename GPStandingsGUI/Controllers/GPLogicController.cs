@@ -66,10 +66,10 @@ namespace GPStandingsGUI.Controllers
             {
                 warning = "Not a number, please enter numerical characters\n";
             }
-            //if (selectedYear.Equals(string.Empty))
-            //{
-            //    warning = "Please enter a numerical year";
-            //}
+            if (selectedYear.Equals(string.Empty))
+            {
+                warning = "Please enter a numerical year";
+            }
             return warning;
         }
 
