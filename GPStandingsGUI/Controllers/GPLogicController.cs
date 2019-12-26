@@ -15,6 +15,20 @@ namespace GPStandingsGUI.Controllers
     {
         private APIController apiController;
 
+        private string warning;
+
+        public string Warning
+        {
+            get { return this.warning; }
+            set
+            {
+                if (this.warning == null)
+                {
+                    this.warning = value;
+                }
+            }
+        }
+
         public GPLogicController()
         {
 
@@ -22,23 +36,23 @@ namespace GPStandingsGUI.Controllers
 
         public Tuple<string, int> CheckDateEntryIsValid(string SelectedYear, bool CanSearchConstructors)
         {
-            string warning = null;
+            this.warning = null;
 
             int year = 0;
 
             if (SelectedYear != null)
             {
-                warning = this.DateCharacterCehck(SelectedYear, warning);
+                this.Warning = this.DateCharacterCheck(SelectedYear, this.Warning);
                 year = this.ParseYear(SelectedYear);
-                warning = this.DateRangeCheck(CanSearchConstructors, year, warning);
+                this.Warning = this.DateRangeCheck(CanSearchConstructors, year, this.Warning);
             }
             else
             {
-                warning = "Field is blank, please enter a numerical year";
+                this.Warning = "Field is blank, please enter a numerical year";
             }
 
-            return new Tuple<string, int>(warning, year);
-        }
+            return new Tuple<string, int>(this.Warning, year);
+        }      
 
         private int ParseYear(string SelectedYear)
         {
@@ -46,16 +60,16 @@ namespace GPStandingsGUI.Controllers
             return year;
         }
 
-        private string DateCharacterCehck(string selectedYear, string warning)
+        private string DateCharacterCheck(string selectedYear, string warning)
         {
             if (!selectedYear.All(char.IsNumber))
             {
-                warning = "Not a number, please enter numerical characters";
+                warning = "Not a number, please enter numerical characters\n";
             }
-            if (selectedYear.Equals(string.Empty))
-            {
-                MessageBox.Show("Please enter a numerical year");
-            }
+            //if (selectedYear.Equals(string.Empty))
+            //{
+            //    warning = "Please enter a numerical year";
+            //}
             return warning;
         }
 
