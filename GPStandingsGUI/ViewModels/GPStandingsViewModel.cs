@@ -16,43 +16,43 @@ namespace GPStandingsGUI.ViewModels
     {
         private readonly Controllers.GPLogicController gpLogicController;
 
-        private string heading1;
+        private string heading;
 
-        private string heading2;
+        //private string heading2;
 
-        private ObservableCollection<object> standingsTable1;
+        private ObservableCollection<object> standingsTable;
 
-        private ObservableCollection<object> standingsTable2;
+        //private ObservableCollection<object> standingsTable2;
 
-        public bool CanPopulateResultsTable1 { get; set; }
+        //public bool CanPopulateResultsTable1 { get; set; }
 
-        public bool CanSearchConstructors1 { get; set; }
+        public bool CanSearchConstructors { get; set; }
 
-        public bool CanSearchConstructors2 { get; set; }
+        //public bool CanSearchConstructors2 { get; set; }
 
-        public string UserSelectedYear1 { get; set; }
+        public string UserSelectedYear { get; set; }
 
-        public string UserSelectedYear2 { get; set; }
+        //public string UserSelectedYear2 { get; set; }
 
-        public string Heading1 { get { return this.heading1; } set { this.heading1 = value; this.OnPropertyChanged("Heading1"); } }
+        public string Heading { get { return this.heading; } set { this.heading = value; this.OnPropertyChanged("Heading"); } }
 
-        public string Heading2 { get { return this.heading2; } set { this.heading2 = value; this.OnPropertyChanged("Heading2"); } }
+        //public string Heading2 { get { return this.heading2; } set { this.heading2 = value; this.OnPropertyChanged("Heading2"); } }
 
-        public ObservableCollection<object> StandingsTable1
+        public ObservableCollection<object> StandingsTable
         {
-            get { return this.standingsTable1; }
-            set { this.standingsTable1 = value; this.OnPropertyChanged("StandingsTable1"); }
+            get { return this.standingsTable; }
+            set { this.standingsTable = value; this.OnPropertyChanged("StandingsTable"); }
         }
 
-        public ObservableCollection<object> StandingsTable2
-        {
-            get { return this.standingsTable2; }
-            set { this.standingsTable2 = value; this.OnPropertyChanged("StandingsTable2"); }
-        }
+        //public ObservableCollection<object> StandingsTable2
+        //{
+        //    get { return this.standingsTable2; }
+        //    set { this.standingsTable2 = value; this.OnPropertyChanged("StandingsTable2"); }
+        //}
 
-        public Models.AsyncRelayCommand Cmd1 { get; private set; }
+        public Models.AsyncRelayCommand Cmd { get; private set; }
 
-        public Models.AsyncRelayCommand Cmd2 { get; private set; }
+        //public Models.AsyncRelayCommand Cmd2 { get; private set; }
 
         public string WindowTitle
         {
@@ -75,11 +75,11 @@ namespace GPStandingsGUI.ViewModels
         {
             this.gpLogicController = new Controllers.GPLogicController();
 
-            this.CanSearchConstructors1 = false;
-            this.CanSearchConstructors2 = false;
+            this.CanSearchConstructors = false;
+            //this.CanSearchConstructors2 = false;
 
-            this.Cmd1 = new Models.AsyncRelayCommand(() => this.PopulateResults(this.UserSelectedYear1, this.CanSearchConstructors1, this.CanPopulateResultsTable1 = true));
-            this.Cmd2 = new Models.AsyncRelayCommand(() => this.PopulateResults(this.UserSelectedYear2, this.CanSearchConstructors2, this.CanPopulateResultsTable1 = false));
+            this.Cmd = new Models.AsyncRelayCommand(() => this.PopulateResults(this.UserSelectedYear, this.CanSearchConstructors));
+            //this.Cmd2 = new Models.AsyncRelayCommand(() => this.PopulateResults(this.UserSelectedYear2, this.CanSearchConstructors2, this.CanPopulateResultsTable1 = false));
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -92,7 +92,7 @@ namespace GPStandingsGUI.ViewModels
             }
         }
 
-        private async Task PopulateResults(string userSelectedYear, bool canSearchConstructors, bool canPopulateResultsTable1)
+        private async Task PopulateResults(string userSelectedYear, bool canSearchConstructors)
         {
             Tuple<string, int> validation = gpLogicController.CheckDateEntryIsValid(userSelectedYear, canSearchConstructors);
             string warning = validation.Item1;
@@ -105,25 +105,25 @@ namespace GPStandingsGUI.ViewModels
             else
             {
                 Tuple<string, ObservableCollection<object>> standingsCollection = await gpLogicController.GetResults(year, canSearchConstructors);
-                string header = standingsCollection.Item1;
-                ObservableCollection<object> standingsTable = standingsCollection.Item2;
-                this.UpdateCollection(canPopulateResultsTable1, header, standingsTable);
+                this.Heading = standingsCollection.Item1;
+                this.StandingsTable = standingsCollection.Item2;
+                //this.UpdateCollection(header, standingsTable);
             }
         }
 
-        private void UpdateCollection(bool canPopulateResultsTable1, string header, ObservableCollection<object> standingsTable)
-        {
-            if (canPopulateResultsTable1)
-            {
-                this.Heading1 = header;
-                this.StandingsTable1 = standingsTable;
-            }
-            else
-            {
-                this.Heading2 = header;
-                this.StandingsTable2 = standingsTable;
-            }
-        }
+        //private void UpdateCollection(bool canPopulateResultsTable1, string header, ObservableCollection<object> standingsTable)
+        //{
+        //    if (canPopulateResultsTable1)
+        //    {
+        //        this.Heading1 = header;
+        //        this.StandingsTable1 = standingsTable;
+        //    }
+        //    else
+        //    {
+        //        this.Heading2 = header;
+        //        this.StandingsTable2 = standingsTable;
+        //    }
+        //}
 
         private void ShowError(string message)
         {
